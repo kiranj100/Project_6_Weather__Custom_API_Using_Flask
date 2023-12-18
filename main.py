@@ -5,11 +5,15 @@ import pandas as pd
 app = Flask(__name__)
 
 
+station = pd.read_csv("data_small/stations.txt", skiprows=17)
+station = station[["STAID", "STANAME                                 "]]
+
 # When the user called home it showing home page of Tutorial.html page
 @app.route("/")
 def home():
     # Render_Templates is searching templates directory Tutorial.html page and
-    return render_template("home.html")
+    # data is share variable value to home.html and showing in webpage
+    return render_template("home.html",data=station.to_html( ))
 
 
 @app.route("/api/v1/<station>/<date>")
